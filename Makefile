@@ -5,17 +5,23 @@ BUILD = build
 INCLUDE = include
 CXXFLAGS = -I $(INCLUDE)
 
-$(BIN)/a.out: $(BUILD)/main.o $(BUILD)/polygon.o $(BUILD)/display.o
+$(BIN)/a.out: $(BUILD)/main.o $(BUILD)/polygon.o $(BUILD)/display.o | bin
 	$(CXX) $(CXXFLAGS) -o $@ $?
 
-$(BUILD)/main.o: $(SRC)/main.cpp
+$(BUILD)/main.o: $(SRC)/main.cpp | build
 	$(CXX) $(CXXFLAGS) -c -o $@ $?
 
-$(BUILD)/polygon.o: $(SRC)/polygon.cpp $(INCLUDE)/thethring/polygon.h
+$(BUILD)/polygon.o: $(SRC)/polygon.cpp $(INCLUDE)/thethring/polygon.h | build
 	$(CXX) $(CXXFLAGS) -c -o $@ $(SRC)/polygon.cpp
 
-$(BUILD)/display.o: $(SRC)/display.cpp $(INCLUDE)/thethring/display.h
+$(BUILD)/display.o: $(SRC)/display.cpp $(INCLUDE)/thethring/display.h | build
 	$(CXX) $(CXXFLAGS) -c -o $@ $(SRC)/display.cpp
+
+bin:
+	mkdir $@
+
+build:
+	mkdir $@
 
 .PHONY: clean
 clean:
