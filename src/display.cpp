@@ -56,14 +56,14 @@ void display::render_line(point p1, point p2) {
 	// Get line directions
 	// Get line x-direction
 	if (dy < 0)
-		x_direction = 1;
-	else
-		x_direction = -1;
-	// Get line y-direction
-	if (dx < 0)
 		y_direction = 1;
 	else
 		y_direction = -1;
+	// Get line y-direction
+	if (dx < 0)
+		x_direction = 1;
+	else
+		x_direction = -1;
 
 	// Render line
 	if (dx == 0 && dy == 0) {
