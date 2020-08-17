@@ -73,11 +73,15 @@ void display::render_line(point p1, point p2) {
 	} else if (std::abs(dx) > std::abs(dy)) {
 		// Render line loop
 		// Direction of render is in the x
-		for (int i = 0; i <= dx; i+=x_direction) {
+		for (int i = 0; i <= std::abs(dx); i++) {
 			// Get canvas coords
-			int cX, cY;
-			cX = i;
-			cY = static_cast<int>(i * (dy/dx) + 0.5);
+			int cX, cY, j;
+			j = i * x_direction;
+			cX = j;
+			cY = static_cast<int>(j * (dy/dx) + 0.5);
+
+			cX += p1.x;
+			cY += p1.y;
 
 			// Fill in spaces on canvas that correspond with line
 			// Fill in only if inside bounds
@@ -88,11 +92,15 @@ void display::render_line(point p1, point p2) {
 	} else {
 		// Render line loop
 		// Direction of render is in the y
-		for (int i = 0; i <= dy; i+=y_direction) {
+		for (int i = 0; i <= std::abs(dy); i++) {
 			// Get canvas coords
-			int cX, cY;
-			cX = static_cast<int>(i * (dx/dy) + 0.5);
-			cY = i;
+			int cX, cY, j;
+			j = i * y_direction;
+			cX = static_cast<int>(j * (dx/dy) + 0.5);
+			cY = j;
+
+			cX += p1.x;
+			cY += p1.y;
 
 			// Fill in spaces on canvas that correspond with line
 			if (cY < height && cY >= 0)
@@ -141,7 +149,7 @@ void display::show() {
 			else
 				std::cout << " ";
 		}
+		std::cout << std::endl;
 	}
-	std::cout << std::endl;
 }
 
