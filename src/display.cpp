@@ -140,15 +140,22 @@ void display::clear_render() {
 			rendered_canvas[i][j] = false;
 }
 
-// TODO: Add show function
+// Show render function
+// Displays rendered_canvas to console
 void display::show() {
+	// Display canvas loop
 	for (int i = 0; i < height; i++) {
+		// Display canvas row loop
 		for (int j = 0; j < width; j++) {
+			// Print canvas spot state
 			if (rendered_canvas[i][j])
+				// Print filled in
 				std::cout << "#";
 			else
+				// Print empty
 				std::cout << " ";
 		}
+		// Print newline
 		std::cout << std::endl;
 	}
 }
