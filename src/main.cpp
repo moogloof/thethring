@@ -34,10 +34,12 @@ int main() {
 	eye2.add_point(eye2_p2);
 
 	// Add polygons for rendering
-	screen.add_polygon(face);
-	screen.add_polygon(smile);
-	screen.add_polygon(eye1);
-	screen.add_polygon(eye2);
+	screen.add_polygon(&face);
+	screen.add_polygon(&smile);
+	screen.add_polygon(&eye1);
+	screen.add_polygon(&eye2);
+
+	face.move(10, 10);
 
 	// Render and display
 	screen.clear_render();

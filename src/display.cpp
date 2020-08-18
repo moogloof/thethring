@@ -19,7 +19,7 @@ display::display(int width, int height) {
 
 // Display polygon constructor
 // Constructs display out of given polygons
-display::display(int width, int height, std::vector<polygon> polygons) {
+display::display(int width, int height, std::vector<polygon*> polygons) {
 	// Do default construction
 	display(width, height);
 
@@ -38,7 +38,7 @@ display::~display() {
 
 // Polygon add function
 // Adds polygon to display polygon list
-void display::add_polygon(polygon p) {
+void display::add_polygon(polygon *p) {
 	polygons.push_back(p);
 }
 
@@ -114,11 +114,11 @@ void display::render_line(point p1, point p2) {
 // Updates rendered_canvas with polygons
 void display::render() {
 	// Render all polygons
-	for (polygon p : polygons) {
+	for (polygon *p : polygons) {
 		// Get vertices of polygon
-		std::vector<point> vertices = p.get_vertices();
+		std::vector<point> vertices = p->get_vertices();
 		// Get relative coord of polygon
-		point relative_coord = p.get_coords();
+		point relative_coord = p->get_coords();
 
 		// Render polygon
 		if (vertices.size() > 1) {
