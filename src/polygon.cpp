@@ -2,12 +2,17 @@
 
 #include <thethring/polygon.h>
 
-// Empty default constructor
-polygon::polygon() {}
+// Default constructor
+polygon::polygon() {
+	// Set initial polygon coords
+	x = 0;
+	y = 0;
+}
 
 // Polygon point constructor
 // Constructs polygon out of given points
 polygon::polygon(std::vector<point> points) {
+	polygon();
 	vertices = points;
 }
 
@@ -21,5 +26,19 @@ void polygon::add_point(point p) {
 // Gets vertices
 std::vector<point> polygon::get_vertices() {
 	return vertices;
+}
+
+// Move function
+// Adds x and y to current position of polygon
+void polygon::move(double x, double y) {
+	this->x += x;
+	this->y += y;
+}
+
+// Coord get function
+// Get position as point
+point polygon::get_coords() {
+	point coords = {x, y};
+	return coords;
 }
 
