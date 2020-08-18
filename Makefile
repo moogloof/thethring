@@ -25,5 +25,5 @@ build:
 
 .PHONY: clean
 clean:
-	rm $(BIN)/*.out $(BUILD)/*.o
+	rm $(BUILD)/*.o $(BIN)/*.out
 

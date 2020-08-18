@@ -1,7 +1,7 @@
-#include <vector>
-
 #ifndef POLYGON_H
 #define POLYGON_H
+
+#include <vector>
 
 struct point {
 	double x;

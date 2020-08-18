@@ -1,9 +1,9 @@
+#ifndef DISPLAY_H
+#define DISPLAY_H
+
 #include <vector>
 
 #include <thethring/polygon.h>
-
-#ifndef DISPLAY_H
-#define DISPLAY_H
 
 class display {
 	private:
