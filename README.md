@@ -19,3 +19,4 @@ make
 # Run executable
 bin/a.out
 ```
+Use the <kbd>wasd</kbd> keys to move the face. Unfortunately, for now, you must press enter for the app to process the keyboard input.
