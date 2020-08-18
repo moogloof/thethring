@@ -143,6 +143,9 @@ void display::clear_render() {
 // Show render function
 // Displays rendered_canvas to console
 void display::show() {
+	// Clear screen
+	std::cout << "\033[2J\033[1;1H";
+
 	// Display canvas loop
 	for (int i = 0; i < height; i++) {
 		// Display canvas row loop
