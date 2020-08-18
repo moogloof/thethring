@@ -1,15 +1,20 @@
+//#include <curses.h>
 #include <iostream>
+#include <stdio.h>
 
 #include <thethring/polygon.h>
 #include <thethring/display.h>
 
 int main() {
+	// Setup polygons and screen
 	// Declare displayer
 	display screen(64, 64);
 	// Declare polygons
 	polygon face;
 	polygon smile;
 	polygon eye1, eye2;
+	// Declare running flag
+	bool running = true;
 
 	// Face points
 	point face_p1 = {12, 13}, face_p2 = {47, 7}, face_p3 = {51, 43}, face_p4 = {9, 40};
@@ -39,12 +44,45 @@ int main() {
 	screen.add_polygon(&eye1);
 	screen.add_polygon(&eye2);
 
-	face.move(10, 10);
+	while (running) {
+		// Render and display
+		screen.clear_render();
+		screen.render();
+		screen.show();
 
-	// Render and display
-	screen.clear_render();
-	screen.render();
-	screen.show();
+		// Wait for wasd keys to maneuver
+		switch (getchar()) {
+			case 'w':
+				face.move(0, -1);
+				smile.move(0, -1);
+				eye1.move(0, -1);
+				eye2.move(0, -1);
+				break;
+			case 'a':
+				face.move(-1, 0);
+				smile.move(-1, 0);
+				eye1.move(-1, 0);
+				eye2.move(-1, 0);
+				break;
+			case 's':
+				face.move(0, 1);
+				smile.move(0, 1);
+				eye1.move(0, 1);
+				eye2.move(0, 1);
+				break;
+			case 'd':
+				face.move(1, 0);
+				smile.move(1, 0);
+				eye1.move(1, 0);
+				eye2.move(1, 0);
+				break;
+			case 'q':
+				running = false;
+				break;
+			default:
+				break;
+		}
+	}
 
 	return 0;
 }
