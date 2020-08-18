@@ -1,4 +1,4 @@
-//#include <curses.h>
+#include <cstdlib>
 #include <iostream>
 #include <stdio.h>
 
@@ -46,10 +46,12 @@ int main() {
 
 	while (running) {
 		// Render and display
+		std::system("stty cooked");
 		screen.clear_render();
 		screen.render();
 		screen.show();
 
+		std::system("stty raw");
 		// Wait for wasd keys to maneuver
 		switch (getchar()) {
 			case 'w':
@@ -83,6 +85,8 @@ int main() {
 				break;
 		}
 	}
+
+	std::system("stty cooked");
 
 	return 0;
 }
