@@ -117,17 +117,35 @@ void display::render() {
 	for (polygon p : polygons) {
 		// Get vertices of polygon
 		std::vector<point> vertices = p.get_vertices();
+		// Get relative coord of polygon
+		point relative_coord = p.get_coords();
 
 		// Render polygon
 		if (vertices.size() > 1) {
 			// Render polygon loop
 			for (int i = 0; i < vertices.size() - 1; i++) {
-				render_line(vertices.at(i), vertices.at(i+1));
+				// Add relative coords
+				point vertice1 = vertices.at(i);
+				point vertice2 = vertices.at(i+1);
+
+				vertice1.x += relative_coord.x;
+				vertice1.y += relative_coord.y;
+				vertice2.x += relative_coord.x;
+				vertice2.y += relative_coord.y;
+
+				// Render side of polygon as line
+				render_line(vertice1, vertice2);
 			}
 		} else if (!vertices.empty()) {
 			// Render point
+			// Add relative coords
+			point vertice = vertices.at(0);
+
+			vertice.x += relative_coord.x;
+			vertice.y += relative_coord.y;
+
 			// If the polygon has only 1 vertice, it is a point
-			render_line(vertices.at(0), vertices.at(0));
+			render_line(vertice, vertice);
 		}
 	}
 }
