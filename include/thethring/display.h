@@ -10,6 +10,7 @@ class display {
 		std::vector<polygon*> polygons;
 		int width, height;
 		bool **rendered_canvas;
+		void render_point(int, int);
 		void render_line(point, point);
 	public:
 		display(int, int);

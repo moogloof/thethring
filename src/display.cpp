@@ -42,6 +42,15 @@ void display::add_polygon(polygon *p) {
 	polygons.push_back(p);
 }
 
+// Point render function
+// Updates rendered_canvas with point
+void display::render_point(int x, int y) {
+	// Fill in only if inside bounds
+	if (y < height && y >= 0)
+		if (x < width && x >= 0)
+			rendered_canvas[y][x] = true;
+}
+
 // TODO: Enforce non-repeatability and efficiency
 // Line render function
 // Updates rendered_canvas with line
@@ -69,43 +78,44 @@ void display::render_line(point p1, point p2) {
 	if (dx == 0 && dy == 0) {
 		// Render point
 		// If the line goes from a point to the same point, it is a point
-		rendered_canvas[static_cast<int>(p1.y + 0.5)][static_cast<int>(p1.x + 0.5)] = true;
+		render_point(std::round(p1.x), std::round(p1.y));
 	} else if (std::abs(dx) > std::abs(dy)) {
 		// Render line loop
 		// Direction of render is in the x
 		for (int i = 0; i <= std::abs(dx); i++) {
 			// Get canvas coords
-			int cX, cY, j;
+			double cX, cY, j;
 			j = i * x_direction;
 			cX = j;
-			cY = static_cast<int>(j * (dy/dx) + 0.5);
+			cY = j * (dy/dx);
 
 			cX += p1.x;
 			cY += p1.y;
 
+			cX = std::round(cX);
+			cY = std::round(cY);
+
 			// Fill in spaces on canvas that correspond with line
-			// Fill in only if inside bounds
-			if (cY < height && cY >= 0)
-				if (cX < width && cX >= 0)
-					rendered_canvas[cY][cX] = true;
+			render_point(static_cast<int>(cX), static_cast<int>(cY));
 		}
 	} else {
 		// Render line loop
 		// Direction of render is in the y
 		for (int i = 0; i <= std::abs(dy); i++) {
 			// Get canvas coords
-			int cX, cY, j;
+			double cX, cY, j;
 			j = i * y_direction;
-			cX = static_cast<int>(j * (dx/dy) + 0.5);
+			cX = j * (dx/dy);
 			cY = j;
 
 			cX += p1.x;
 			cY += p1.y;
 
+			cX = std::round(cX);
+			cY = std::round(cY);
+
 			// Fill in spaces on canvas that correspond with line
-			if (cY < height && cY >= 0)
-				if (cX < width && cX >= 0)
-					rendered_canvas[cY][cX] = true;
+			render_point(static_cast<int>(cX), static_cast<int>(cY));
 		}
 	}
 }
